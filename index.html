@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nandina</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff0f5;
+      font-family: 'Comic Sans MS', cursive;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #d63384;
+      text-align: center;
+      z-index: 2;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    #yes {
+      background-color: #ff69b4;
+      color: white;
+    }
+
+    #no {
+      background-color: #ccc;
+      color: #333;
+      position: relative;
+    }
+
+    #surpresinha {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      display: none;
+      border: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Nandinha, sabia que amo você?</h1>
+
+  <div class="buttons">
+    <button id="yes">Sim 💖</button>
+    <button id="no">Não 😢</button>
+  </div>
+
+  <iframe id="surpresinha" src="flower.html"></iframe>
+
+  <script>
+    const btnNo = document.getElementById("no");
+    const btnYes = document.getElementById("yes");
+    const surpresinha = document.getElementById("surpresinha");
+
+    let isRunning = false;
+
+    function moveButton() {
+      if (!isRunning) {
+        btnNo.style.position = 'absolute';
+        isRunning = true;
+      }
+
+      const padding = 20;
+      const btnWidth = btnNo.offsetWidth;
+      const btnHeight = btnNo.offsetHeight;
+
+      const maxX = window.innerWidth - btnWidth - padding;
+      const maxY = window.innerHeight - btnHeight - padding;
+
+      const newX = Math.floor(Math.random() * maxX);
+      const newY = Math.floor(Math.random() * maxY);
+
+      btnNo.style.left = `${newX}px`;
+      btnNo.style.top = `${newY}px`;
+    }
+
+    btnNo.addEventListener("mouseenter", moveButton);
+    btnNo.addEventListener("click", moveButton);
+
+    btnYes.addEventListener("click", () => {
+      surpresinha.style.display = "block";
+    });
+  </script>
+</body>
+</html>
